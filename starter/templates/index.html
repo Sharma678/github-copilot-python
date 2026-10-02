@@ -6,13 +6,49 @@
   <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-  <h1>Sudoku Game</h1>
+  <header class="page-header">
+    <h1>Sudoku Game</h1>
+    <button id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">Dark mode: Off</button>
+  </header>
   <div id="sudoku-board"></div>
   <div class="controls">
+    <label for="difficulty">Difficulty:</label>
+    <select id="difficulty">
+      <option value="Easy">Easy</option>
+      <option value="Medium" selected>Medium</option>
+      <option value="Hard">Hard</option>
+    </select>
     <button id="new-game">New Game</button>
     <button id="check-solution">Check Solution</button>
+    <button id="hint" disabled>Hint</button>
+    <span id="hint-counter">Hints used: <strong id="hint-count">0</strong></span>
+    <span id="timer-counter">Time: <strong id="game-timer">00:00:00</strong></span>
     <span id="message"></span>
   </div>
+  <section id="leaderboard" aria-labelledby="leaderboard-title">
+    <h2 id="leaderboard-title">Top 10 Fastest Times</h2>
+    <form id="leaderboard-name-form" hidden>
+      <label for="leaderboard-player-name">Your name</label>
+      <input id="leaderboard-player-name" name="name" type="text" maxlength="40" autocomplete="name" required>
+      <button type="submit">Submit Time</button>
+    </form>
+    <p id="leaderboard-message" role="status" aria-live="polite"></p>
+    <p id="leaderboard-empty">No recorded times yet.</p>
+    <div id="leaderboard-table-wrap" tabindex="0" aria-label="Leaderboard results">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">Player name</th>
+            <th scope="col">Time</th>
+            <th scope="col">Difficulty</th>
+            <th scope="col">Hints used</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-entries"></tbody>
+      </table>
+    </div>
+  </section>
   <script src="/static/main.js"></script>
 </body>
 </html>
